@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.dao.OrderSettingDao">
+    <insert id="add" parameterType="com.itheima.pojo.OrderSetting">
+        insert into t_ordersetting
+      		(orderDate, `number`,reservations)
+                      values
+      		(#{orderDate},#{number},#{reservations})
+    </insert>
+
+
+    <update id="editNumberByOrderDate" parameterType="com.itheima.pojo.OrderSetting">
+        update t_ordersetting
+          set `number` = #{number}
+          where DATE_FORMAT(orderDate, '%Y-%m-%d') = #{orderDateStr}
+    </update>
+
+    <select id="findCountByOrderDate" parameterType="string" resultType="long">
+        select count(id) from t_ordersetting WHERE DATE_FORMAT(orderDate, '%Y-%m-%d') =  #{orderDate}
+    </select>
+    <!--根据日期范围查询-->
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="com.itheima.pojo.OrderSetting">
+        select * from t_ordersetting where YEAR(orderDate)=#{year} and MONTH (orderDate)=#{month}
+    </select>
+
+    <update id="editReservationsByOrderDate" parameterType="com.itheima.pojo.OrderSetting">
+        update t_ordersetting set reservations = #{reservations} where orderDate = #{orderDate}
+    </update>
+    <select id="findByOrderDate" parameterType="string" resultType="com.itheima.pojo.OrderSetting">
+        select * from t_ordersetting where orderDate = #{orderDate}
+    </select>
+</mapper>

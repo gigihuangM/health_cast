@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.itheima.dao.CheckItemDao">
+    <insert id="add" parameterType="com.itheima.pojo.CheckItem">
+      insert into t_checkitem(code,name,sex,age,price,type,remark,attention)
+     values(#{code},#{name},#{sex},#{age},#{price},#{type},#{remark},#{attention})
+   </insert>
+
+</mapper>
